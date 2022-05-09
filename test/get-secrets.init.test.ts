@@ -1,4 +1,8 @@
 import { describe, expect, it } from 'vitest';
+import supertest from 'supertest';
+import server from '../src/server';
+
+const request = supertest(server);
 
 describe('シークレット値を取得するための結合テスト', () => {
   it.todo('シークレット値を取得できる');
