@@ -1,0 +1,101 @@
+openapi: 3.0.0
+info:
+  title: "One Time Secret API"
+  description: "シークレット値を保存するためのワンタイムAPI"
+  version: 1.0.0
+
+paths:
+  /secrets/{urlId}:
+    get:
+      summary: 入力されたIDをもとにシークレット値を返す
+      parameters:
+        - name: urlId
+          in: path
+          required: true
+          description: シークレット値を保存した後に得られるUrlID
+          schema:
+            type: string
+            minLength: 10
+      responses:
+        200:
+          description: シークレット値を返す
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/secret'
+              example: { secret: "My Secret"}
+        400:
+          description: 指定したUrlIDが有効ではない
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/validationError'
+              example: { 
+                title: "ValidationError",
+                secret: "UrlId format is not valid"
+              }
+        404:
+          description: 指定したシークレット値が存在しない
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/secretNotFoundError'
+              example: { 
+                title: "Secret Not Found Error",
+                secret: "The secret you are looking for does not exist in the server"
+              }
+  /secrets:
+    description: シークレット値を保存する
+    post:
+      summary: Store secrets in the API
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/secret'
+            example: { secret: "My Secret" }
+      responses:
+        201:
+          description: データベースにシークレット値を保存する
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/urlId'
+              example: { urlId: "qwe29o12kw2uj298"}
+        400:
+          description: リクエストがJSONフォーマットに従っていない
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/validationError'
+              example: { 
+                title: "ValidationError",
+                secret: "Json format is not valid"
+              }
+
+components:
+  schemas:
+    secret:
+      type: object
+      properties:
+        secret:
+          type: string
+    urlId:
+      type: object
+      properties:
+        urlId:
+          type: string
+    secretNotFoundError:
+      type: object
+      properties:
+        title:
+          type: string
+        message:
+          type: string
+    validationError:
+      type: object
+      properties:
+        title:
+          type: string
+        message:
+          type: string

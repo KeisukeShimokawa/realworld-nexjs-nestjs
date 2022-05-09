@@ -5,3 +5,21 @@
 これはケントベックの「テスト駆動開発」で紹介された、ドメイン周りのロジックから設計を行なっていく「インサイドアウト」な TDD とは異なる手法である。
 
 このリポジトリでは、ロンドン派の TDD を検証する。
+
+ベースとして下記の講座を活用する。
+
+- [Building APIs doing Outside-in TDD in Node and TypeScript](https://www.udemy.com/course/building-apis-doing-outside-in-tdd-in-node-and-typescript/learn/lecture/29854486#overview)
+
+実現する機能は以下になる。
+
+- `POST /api/v1/secrets`
+  - 入力されたシークレット値を保存する
+  - シークレット値は後から URL ベースで取得できる
+  - 最低でも 3 文字
+- `GET /api/v1/secrets/<secret value>`
+  - 入力されたシークレット値を取得する
+  - 一度だけ取り出すことができる
+  - 取り出した後は削除される
+  - アクセスする URL には最低でも 10 文字の値が必要
+  - 存在しない場合エラーを返す
+  - 期限が失効していた場合は、エラーを返す
