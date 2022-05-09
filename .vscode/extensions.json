@@ -1,5 +1,8 @@
 {
-    "recommendations": [
-        "42Crunch.vscode-openapi"
-    ]
+  "recommendations": [
+    "42Crunch.vscode-openapi",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "usernamehw.errorlens"
+  ]
 }

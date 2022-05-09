@@ -23,3 +23,20 @@
   - アクセスする URL には最低でも 10 文字の値が必要
   - 存在しない場合エラーを返す
   - 期限が失効していた場合は、エラーを返す
+
+## 環境構築
+
+```bash
+npm init -y
+
+npm install --save-dev typescript @types/node vitest c8
+
+npm install --save-dev \
+  eslint \
+  @typescript-eslint/parser \
+  @typescript-eslint/eslint-plugin \
+  prettier \
+  eslint-config-prettier \
+  eslint-plugin-import \
+  eslint-plugin-unused-imports
+```
