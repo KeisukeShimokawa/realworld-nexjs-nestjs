@@ -1,8 +1,18 @@
-import { describe, expect, it } from 'vitest';
+import { Request, request, Response, response } from 'express';
+import { describe, expect, it, vi } from 'vitest';
 import { errorHandler } from './ErrorHandler';
+import { UrlIdValidationError } from './UrlIdValidationError';
 
 describe('ErrorHandler Tests', () => {
   it('should generate an Error response for a UrlIdValidationError', () => {
+    const error = new UrlIdValidationError('UrlIDが短すぎます');
+    const req: Request = request;
+    req.params = { urlId: 'test' };
+    const res: Response = response;
+    res.status = vi.fn();
+    res.json = vi.fn();
+    const next = vi.fn();
+
     errorHandler(error, req, res, next);
 
     expect(next).toBeCalledTimes(0);
