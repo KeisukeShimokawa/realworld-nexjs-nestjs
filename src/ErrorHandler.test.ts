@@ -9,8 +9,8 @@ describe('ErrorHandler Tests', () => {
     const req: Request = request;
     req.params = { urlId: 'test' };
     const res: Response = response;
-    res.status = vi.fn();
-    res.json = vi.fn();
+    res.status = vi.fn().mockReturnThis();
+    res.json = vi.fn().mockReturnThis();
     const next = vi.fn();
 
     errorHandler(error, req, res, next);
