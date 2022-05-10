@@ -1,6 +1,6 @@
 import { NextFunction } from 'connect';
 import { Request, Response } from 'express';
-import { UrlIdValidationError } from './UrlIdValidationError';
+import { UrlIdValidationError } from '../UrlIdValidationError';
 
 export class SecretByIdController {
   retrieveSecretById(req: Request, res: Response, next: NextFunction) {
