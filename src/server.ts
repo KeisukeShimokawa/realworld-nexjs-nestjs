@@ -1,6 +1,9 @@
 import { Application } from './Application';
+import { Route } from './Route';
 
-const application = new Application();
+const routeList: Route[] = [];
+
+const application = new Application(routeList);
 
 const expressApplication = application.getExpressApplication();
 
