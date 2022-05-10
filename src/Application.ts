@@ -5,6 +5,7 @@ export class Application {
   private expressApplication: express.Application = express();
 
   constructor(private routeList: Route[]) {
+    routeList.forEach((route) => route.mountRoute(this.expressApplication));
   }
 
   getExpressApplication(): express.Application {
