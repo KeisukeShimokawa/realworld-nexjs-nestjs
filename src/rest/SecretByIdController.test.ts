@@ -16,4 +16,17 @@ describe('SecretByIdController Tests', () => {
     expect(next).toBeCalledTimes(1);
     expect(next).toBeCalledWith(new UrlIdValidationError('UrlIDが短すぎます'));
   });
+
+  it('should throw an error if the secret was not found', async () => {
+    const req: Request = request;
+    req.params = { urlId: '924675235762345' };
+    const res: Response = response;
+    const next = vi.fn();
+
+    const secretByIdController = new SecretByIdController();
+    await secretByIdController.retrieveSecretById(req, res, next);
+
+    expect(next).toBeCalledTimes(1);
+    expect(next).toBeCalledWith(new SecretNotFoundError());
+  });
 });
