@@ -1,7 +1,7 @@
 import { NextFunction } from 'connect';
 import { Request, Response } from 'express';
-import { SecretRetriver } from '../SecretRetriver';
-import { UrlId } from '../UrlId';
+import { SecretRetriver } from '../../services/SecretRetriver';
+import { UrlId } from '../../domain/UrlId';
 
 export class SecretByIdController {
   constructor(private secretRetriever: SecretRetriver) {}
