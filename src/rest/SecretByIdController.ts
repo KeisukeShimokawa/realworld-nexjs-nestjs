@@ -1,11 +1,14 @@
 import { NextFunction } from 'connect';
 import { Request, Response } from 'express';
-import { UrlIdValidationError } from '../UrlIdValidationError';
+import { UrlId } from '../UrlId';
 
 export class SecretByIdController {
-  retrieveSecretById(req: Request, res: Response, next: NextFunction) {
-    if (req.params.urlId.length < 10) {
-      next(new UrlIdValidationError('UrlIDが短すぎます'));
+
+  async retrieveSecretById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const urlId = new UrlId(req.params.urlId);
+    } catch (error) {
+      next(error);
     }
   }
 }
