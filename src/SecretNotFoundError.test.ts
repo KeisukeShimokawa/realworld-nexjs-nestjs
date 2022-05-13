@@ -1,4 +1,5 @@
 import { expect, describe, it } from 'vitest';
+import { SecretNotFoundError } from './SecretNotFoundError';
 
 describe('UrlIdValidationError Tests', () => {
   it('should create a UrlIdValidationError error', () => {
