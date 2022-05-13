@@ -1,7 +1,7 @@
 import { Request, request, Response, response } from 'express';
 import { describe, expect, it, vi } from 'vitest';
-import { SecretNotFoundError } from '../../errors/SecretNotFoundError';
-import { UrlIdValidationError } from '../../errors/UrlIdValidationError';
+import { SecretNotFoundError } from '../../../domain/errors/SecretNotFoundError';
+import { UrlIdValidationError } from '../../../domain/errors/UrlIdValidationError';
 import { errorHandler } from './ErrorHandler';
 
 describe('ErrorHandler Tests', () => {
