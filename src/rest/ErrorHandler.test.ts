@@ -1,7 +1,7 @@
 import { Request, request, Response, response } from 'express';
 import { describe, expect, it, vi } from 'vitest';
 import { errorHandler } from './ErrorHandler';
-import { UrlIdValidationError } from './UrlIdValidationError';
+import { UrlIdValidationError } from '../UrlIdValidationError';
 
 describe('ErrorHandler Tests', () => {
   it('should generate an Error response for a UrlIdValidationError', () => {
