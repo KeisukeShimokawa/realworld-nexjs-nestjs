@@ -1,6 +1,7 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import supertest from 'supertest';
 import server from '../src/server';
+import { SecretModel } from '../src/infra/repositories/SecretModel';
 
 const request = supertest(server);
 
@@ -8,6 +9,8 @@ describe('シークレット値を取得するための結合テスト', () => {
   it.todo('シークレット値を取得できる');
 
   it('シークレット値がDBに登録されていない場合、エラーが返される', async () => {
+    SecretModel.findOne = vi.fn().mockResolvedValueOnce(null);
+
     const response = await request.get('/api/v1/secrets/ksdfhsalkjsdfhsa');
 
     expect(response.status).toBe(404);
