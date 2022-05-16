@@ -13,4 +13,13 @@ describe('MongoSecretRepository Tests', () => {
       'mongodb://localhost:27017/onetimesecretdb'
     );
   });
+
+  it('should not connect to the database when connection is already established', () => {
+    mongoose.connect = vi.fn();
+    mongoose.connection.readyState = 1;
+
+    new MongoSecretRepository();
+
+    expect(mongoose.connect).toBeCalledTimes(0);
+  });
 });
