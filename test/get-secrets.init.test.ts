@@ -16,7 +16,7 @@ describe('シークレット値を取得するための結合テスト', () => {
     expect(response.status).toBe(404);
     expect(response.body).toEqual({
       name: 'SecretNotFoundError',
-      message: 'Secret was not found',
+      message: 'Secret was not found in the system',
     });
   });
 
