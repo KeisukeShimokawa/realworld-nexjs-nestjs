@@ -22,4 +22,7 @@ describe('MongoSecretRepository Tests', () => {
 
     expect(mongoose.connect).toBeCalledTimes(0);
   });
+
+  it('should return a null object when the secret is not found', async () => {
+  });
 });
