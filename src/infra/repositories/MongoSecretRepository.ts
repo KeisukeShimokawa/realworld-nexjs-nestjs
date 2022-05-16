@@ -11,7 +11,7 @@ export class MongoSecretRepository implements SecretRepository {
     }
   }
 
-  async getSecretByUrlId(urlId: UrlId): Promise<Secret> {
+  async getSecretByUrlId(urlId: UrlId): Promise<Secret | null> {
     const doc = await SecretModel.findOne({ urlId: urlId.toString() });
 
     if (doc === null) return null;
