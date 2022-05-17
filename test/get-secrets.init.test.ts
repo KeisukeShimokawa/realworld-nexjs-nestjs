@@ -43,5 +43,18 @@ describe('シークレット値を取得するための結合テスト', () => {
     });
   });
 
-  it.todo('想定していないエラーが返ってきた場合、ステータスコード500を返す');
+  it('想定していないエラーが返ってきた場合、ステータスコード500を返す', async () => {
+    SecretModel.findOne = vi.fn().mockImplementationOnce(async () => {
+      throw new Error('Connection refused');
+    });
+    mongoose.connection.readyState = 1;
+
+    const response = await request.get('/api/v1/secrets/ksdfhsalkjsdfhsa');
+
+    expect(response.status).toBe(500);
+    expect(response.body).toEqual({
+      name: 'InternalServerError',
+      message: 'Something went wrong',
+    });
+  });
 });
