@@ -11,9 +11,6 @@ export class OneTimeSecretRetriever implements SecretRetriver {
     const secret = await this.secretRepository.getSecretByUrlId(urlId);
     if (secret === null) throw new SecretNotFoundError();
 
-    // try to retrieve a secret
-    // if found return secret & remove the secret
-    // if not found throw an error
     return secret;
   }
 }
