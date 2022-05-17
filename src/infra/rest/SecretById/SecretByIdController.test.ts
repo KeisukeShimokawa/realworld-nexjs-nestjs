@@ -5,6 +5,7 @@ import { UrlIdValidationError } from '../../../domain/errors/UrlIdValidationErro
 import { SecretRetriver } from '../../../services/SecretRetriver';
 import { SecretNotFoundError } from '../../../domain/errors/SecretNotFoundError';
 import { UrlId } from '../../../domain/models/UrlId';
+import { Secret } from '../../../domain/models/Secret';
 
 describe('SecretByIdController Tests', () => {
   it('should throw an error if the urlId is too short', async () => {
@@ -44,5 +45,32 @@ describe('SecretByIdController Tests', () => {
     expect(secretRetriever.retrieveSecretById).toBeCalledWith(
       new UrlId('924675235762345')
     );
+  });
+
+  it('should respond with a secret when it is found', async () => {
+    const req: Request = request;
+    req.params = { urlId: '924675235762345' };
+    const res: Response = response;
+    res.status = vi.fn().mockReturnThis();
+    res.json = vi.fn().mockReturnThis();
+    const next = vi.fn();
+
+    const secretRetriever: SecretRetriver = {
+      retrieveSecretById: vi
+        .fn()
+        .mockResolvedValueOnce(new Secret('hsdfgaskf')),
+    };
+    const secretByIdController = new SecretByIdController(secretRetriever);
+    await secretByIdController.retrieveSecretById(req, res, next);
+
+    expect(next).toBeCalledTimes(0);
+    expect(secretRetriever.retrieveSecretById).toBeCalledTimes(1);
+    expect(secretRetriever.retrieveSecretById).toBeCalledWith(
+      new UrlId('924675235762345')
+    );
+    expect(res.status).toBeCalledTimes(1);
+    expect(res.status).toBeCalledWith(200);
+    expect(res.json).toBeCalledTimes(1);
+    expect(res.json).toBeCalledWith({ secret: 'hsdfgaskf' });
   });
 });
