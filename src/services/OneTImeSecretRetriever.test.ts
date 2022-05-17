@@ -20,4 +20,20 @@ describe('OneTimeSecretRetriver Tests', () => {
       new UrlId('ajhfdjkfhasdf')
     );
   });
+
+  it('should return the secret when it is found', async () => {
+    const secretRepository: SecretRepository = {
+      getSecretByUrlId: vi.fn().mockResolvedValueOnce(new Secret('sadhfasjf')),
+    };
+    const oneTimeSecretRetriever = new OneTimeSecretRetriever(secretRepository);
+
+    const urlId = new UrlId('ajhfdjkfhasdf');
+    const secret = await oneTimeSecretRetriever.retrieveSecretById(urlId);
+
+    expect(secret).toEqual(new Secret('sadhfasjf'));
+    expect(secretRepository.getSecretByUrlId).toBeCalledTimes(1);
+    expect(secretRepository.getSecretByUrlId).toBeCalledWith(
+      new UrlId('ajhfdjkfhasdf')
+    );
+  });
 });
