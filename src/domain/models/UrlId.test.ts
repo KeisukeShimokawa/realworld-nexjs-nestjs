@@ -12,4 +12,8 @@ describe('UrlId Tests', () => {
       new UrlIdValidationError('UrlIDが短すぎます')
     );
   });
+
+  it('should return a string representation on the toString method', () => {
+    expect(new UrlId('123jjshdfajslhfd').toString()).toBe('123jjshdfajslhfd');
+  });
 });
