@@ -6,7 +6,16 @@ import { SecretModel } from '../src/infra/repositories/SecretModel';
 const request = supertest(server);
 
 describe('シークレット値を取得するための結合テスト', () => {
-  it.todo('シークレット値を取得できる');
+  it('シークレット値を取得できる', async () => {
+    SecretModel.findOne = vi.fn().mockResolvedValueOnce({ secret: 'mySecret' });
+
+    const response = await request.get('/api/v1/secrets/ksdfhsalkjsdfhsa');
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({
+      secret: 'mySecret',
+    });
+  });
 
   it('シークレット値がDBに登録されていない場合、エラーが返される', async () => {
     SecretModel.findOne = vi.fn().mockResolvedValueOnce(null);
