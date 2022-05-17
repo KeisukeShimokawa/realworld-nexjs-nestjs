@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import { MongoSecretRepository } from './MongoSecretRepository';
 import { UrlId } from '../../domain/models/UrlId';
 import { SecretModel } from './SecretModel';
+import { Secret } from '../../domain/models/Secret';
 
 describe('MongoSecretRepository Tests', () => {
   it('should connect to the database', () => {
@@ -35,5 +36,22 @@ describe('MongoSecretRepository Tests', () => {
 
     expect(await mongoSecretRepository.getSecretByUrlId(urlId)).toBeNull();
     expect(mongoose.connect).toBeCalledTimes(0);
+  });
+
+  it('should return the secret when it is found', async () => {
+    SecretModel.findOne = vi.fn().mockResolvedValueOnce({ secret: 'sjdhfas' });
+    mongoose.connect = vi.fn();
+    mongoose.connection.readyState = 1;
+
+    const urlId = new UrlId('sdjhfaasjaf');
+    const mongoSecretRepository = new MongoSecretRepository();
+
+    expect(await mongoSecretRepository.getSecretByUrlId(urlId)).toEqual(
+      new Secret('sjdhfas')
+    );
+    expect(mongoose.connect).toBeCalledTimes(0);
+
+    expect(SecretModel.findOne).toBeCalledTimes(1);
+    expect(SecretModel.findOne).toBeCalledWith({ urlId: 'sdjhfaasjaf' });
   });
 });
