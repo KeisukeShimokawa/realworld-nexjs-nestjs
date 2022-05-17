@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { SecretNotFoundError } from '../../../domain/errors/SecretNotFoundError';
+import { UrlIdValidationError } from '../../../domain/errors/UrlIdValidationError';
 
 export function errorHandler(
   error: Error,
@@ -12,10 +13,15 @@ export function errorHandler(
       name: error.name,
       message: error.message,
     });
-  } else {
+  } else if (error instanceof UrlIdValidationError) {
     res.status(400).json({
       name: error.name,
       message: error.message,
+    });
+  } else {
+    res.status(500).json({
+      name: 'InternalServerError',
+      message: 'Something went wrong',
     });
   }
 }
