@@ -54,4 +54,17 @@ describe('MongoSecretRepository Tests', () => {
     expect(SecretModel.findOne).toBeCalledTimes(1);
     expect(SecretModel.findOne).toBeCalledWith({ urlId: 'sdjhfaasjaf' });
   });
+
+  it('should remove a secret from the database', async () => {
+    SecretModel.deleteOne = vi.fn();
+    mongoose.connect = vi.fn();
+    mongoose.connection.readyState = 1;
+
+    const urlId = new UrlId('sdjhfaasjaf');
+    const mongoSecretRepository = new MongoSecretRepository();
+    await mongoSecretRepository.removeSecretByUrlId(urlId);
+
+    expect(SecretModel.deleteOne).toBeCalledTimes(1);
+    expect(SecretModel.deleteOne).toBeCalledWith({ urlId: 'sdjhfaasjaf' });
+  });
 });
