@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { Secret } from './Secret';
-import { SecretValidationError } from './SecretValidationError';
+import { SecretValidationError } from '../errors/SecretValidationError';
 
 describe('Secret Tests', () => {
   it('should create an instance of Secret', () => {

@@ -1,10 +1,10 @@
 import { request, Request, response, Response } from 'express';
 import { describe, expect, it, vi } from 'vitest';
 import { SecretByIdController } from './SecretByIdController';
-import { UrlIdValidationError } from '../UrlIdValidationError';
-import { SecretNotFoundError } from '../SecretNotFoundError';
-import { SecretRetriver } from '../SecretRetriver';
-import { UrlId } from '../UrlId';
+import { UrlIdValidationError } from '../../../domain/errors/UrlIdValidationError';
+import { SecretRetriver } from '../../../services/SecretRetriver';
+import { SecretNotFoundError } from '../../../domain/errors/SecretNotFoundError';
+import { UrlId } from '../../../domain/models/UrlId';
 
 describe('SecretByIdController Tests', () => {
   it('should throw an error if the urlId is too short', async () => {

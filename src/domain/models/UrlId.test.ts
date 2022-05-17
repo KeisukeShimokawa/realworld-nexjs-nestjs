@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { UrlId } from './UrlId';
-import { UrlIdValidationError } from './UrlIdValidationError';
+import { UrlIdValidationError } from '../errors/UrlIdValidationError';
 
 describe('UrlId Tests', () => {
   it('should create a instance of UrlId', () => {

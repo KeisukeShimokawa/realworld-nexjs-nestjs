@@ -1,8 +1,8 @@
 import { Request, request, Response, response } from 'express';
 import { describe, expect, it, vi } from 'vitest';
+import { SecretNotFoundError } from '../../../domain/errors/SecretNotFoundError';
+import { UrlIdValidationError } from '../../../domain/errors/UrlIdValidationError';
 import { errorHandler } from './ErrorHandler';
-import { UrlIdValidationError } from '../UrlIdValidationError';
-import { SecretNotFoundError } from '../SecretNotFoundError';
 
 describe('ErrorHandler Tests', () => {
   it('should generate an Error response for a UrlIdValidationError', () => {
