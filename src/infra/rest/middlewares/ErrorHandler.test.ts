@@ -2,6 +2,7 @@ import { Request, request, Response, response } from 'express';
 import { describe, expect, it, vi } from 'vitest';
 import { SecretNotFoundError } from '../../../domain/errors/SecretNotFoundError';
 import { UrlIdValidationError } from '../../../domain/errors/UrlIdValidationError';
+import { RequestValidationError } from '../Secret/RequestValidationError';
 import { errorHandler } from './ErrorHandler';
 
 describe('ErrorHandler Tests', () => {
@@ -45,6 +46,27 @@ describe('ErrorHandler Tests', () => {
     expect(res.json).toBeCalledWith({
       name: 'SecretNotFoundError',
       message: 'Secret was not found in the system',
+    });
+  });
+
+  it('should generate an Error response for a RequestValidationError', () => {
+    const error = new RequestValidationError('Request body is not valid');
+    const req: Request = request;
+    req.params = { urlId: 'test' };
+    const res: Response = response;
+    res.status = vi.fn().mockReturnThis();
+    res.json = vi.fn().mockReturnThis();
+    const next = vi.fn();
+
+    errorHandler(error, req, res, next);
+
+    expect(next).toBeCalledTimes(0);
+    expect(res.status).toBeCalledTimes(1);
+    expect(res.status).toBeCalledWith(400);
+    expect(res.json).toBeCalledTimes(1);
+    expect(res.json).toBeCalledWith({
+      name: 'RequestValidationError',
+      message: 'Request body is not valid',
     });
   });
 
