@@ -1,6 +1,7 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import supertest from 'supertest';
 import server from '../src/server';
+import { SecretModel } from '../src/infra/repositories/SecretModel';
 
 const request = supertest(server);
 
@@ -8,12 +9,14 @@ describe('シークレット値を取得するための結合テスト', () => {
   it.todo('シークレット値を取得できる');
 
   it('シークレット値がDBに登録されていない場合、エラーが返される', async () => {
+    SecretModel.findOne = vi.fn().mockResolvedValueOnce(null);
+
     const response = await request.get('/api/v1/secrets/ksdfhsalkjsdfhsa');
 
     expect(response.status).toBe(404);
     expect(response.body).toEqual({
       name: 'SecretNotFoundError',
-      message: 'Secret was not found',
+      message: 'Secret was not found in the system',
     });
   });
 
@@ -26,4 +29,6 @@ describe('シークレット値を取得するための結合テスト', () => {
       message: 'UrlIDが短すぎます',
     });
   });
+
+  it.todo('想定していないエラーが返ってきた場合、ステータスコード500を返す');
 });
