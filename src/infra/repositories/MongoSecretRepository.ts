@@ -16,6 +16,10 @@ export class MongoSecretRepository implements SecretRepository {
 
     if (doc === null) return null;
 
-    return new Secret('ahfgkasjfhgksahf');
+    return new Secret(doc.secret);
+  }
+
+  async removeSecretByUrlId(urlId: UrlId): Promise<void> {
+    await SecretModel.deleteOne({ urlId: urlId.toString() });
   }
 }
