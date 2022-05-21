@@ -47,4 +47,26 @@ describe('ErrorHandler Tests', () => {
       message: 'Secret was not found in the system',
     });
   });
+
+  it('should generate a generic Error for uncontrolled situations', () => {
+    const error = new Error('There is here');
+    const req: Request = request;
+    req.params = { urlId: 'test' };
+    const res: Response = response;
+    res.status = vi.fn().mockReturnThis();
+    res.json = vi.fn().mockReturnThis();
+    const next = vi.fn();
+
+    errorHandler(error, req, res, next);
+
+    console.log(res);
+    expect(next).toBeCalledTimes(0);
+    expect(res.status).toBeCalledTimes(1);
+    expect(res.status).toBeCalledWith(500);
+    expect(res.json).toBeCalledTimes(1);
+    expect(res.json).toBeCalledWith({
+      name: 'InternalServerError',
+      message: 'Something went wrong',
+    });
+  });
 });
