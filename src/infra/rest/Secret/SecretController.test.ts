@@ -20,4 +20,21 @@ describe('SecretController Tests', () => {
       new RequestValidationError('Request body format is not valid')
     );
   });
+
+  it('should throw an error if the secret is not a string', async () => {
+    const req: Request = request;
+    req.body = {
+      secret: 3641234132,
+    };
+    const res: Response = response;
+    const next = vi.fn();
+
+    const secretByIdController = new SecretController();
+    await secretByIdController.storeSecret(req, res, next);
+
+    expect(next).toBeCalledTimes(1);
+    expect(next).toBeCalledWith(
+      new RequestValidationError('Secret is not a string')
+    );
+  });
 });
