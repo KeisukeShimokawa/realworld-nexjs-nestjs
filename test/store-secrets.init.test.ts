@@ -39,7 +39,17 @@ describe('シークレット値を保存するための結合テスト', () => {
     });
   });
 
-  it.todo('should return an error if the secret is too short');
+  it('should return an error if the secret is too short', async () => {
+    const response = await request.post('/api/v1/secrets').send({
+      secret: '22',
+    });
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({
+      name: 'SecretValidationError',
+      message: 'Secretが短すぎます',
+    });
+  });
 
   it.todo('should store a secret and return the UrlId');
 
