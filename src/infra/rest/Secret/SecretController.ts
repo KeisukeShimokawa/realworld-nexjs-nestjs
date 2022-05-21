@@ -1,5 +1,6 @@
 import { NextFunction } from 'connect';
 import { Request, Response } from 'express';
+import { Secret } from '../../../domain/models/Secret';
 import { RequestValidationError } from './RequestValidationError';
 
 export class SecretController {
@@ -14,6 +15,8 @@ export class SecretController {
 
       if (typeof req.body?.secret !== 'string')
         throw new RequestValidationError('Secret is not a string');
+
+      const secret = new Secret(req.body.secret);
     } catch (error) {
       next(error);
     }
