@@ -27,7 +27,17 @@ describe('シークレット値を保存するための結合テスト', () => {
     });
   });
 
-  it.todo('should return an error if the secret is not a string');
+  it('should return an error if the secret is not a string', async () => {
+    const response = await request.post('/api/v1/secrets').send({
+      secret: 1234567890,
+    });
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({
+      name: 'RequestValidationError',
+      message: 'Secret is not a string',
+    });
+  });
 
   it.todo('should return an error if the secret is too short');
 
