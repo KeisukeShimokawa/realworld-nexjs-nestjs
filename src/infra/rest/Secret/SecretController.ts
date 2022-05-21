@@ -9,10 +9,6 @@ export class SecretController {
     console.log('req', req.body);
 
     try {
-      // if (req.body && Object.keys(req.body).length === 0)
-      if (!req.body)
-        throw new RequestValidationError('Request body is not provided');
-
       if (!req.body?.secret)
         throw new RequestValidationError('Request body format is not valid');
     } catch (error) {

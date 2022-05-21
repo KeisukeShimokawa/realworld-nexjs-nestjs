@@ -11,7 +11,7 @@ describe('シークレット値を保存するための結合テスト', () => {
     expect(response.status).toBe(400);
     expect(response.body).toEqual({
       name: 'RequestValidationError',
-      message: 'Request body is not provided',
+      message: 'Request body format is not valid',
     });
   });
 
