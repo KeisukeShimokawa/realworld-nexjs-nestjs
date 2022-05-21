@@ -15,7 +15,17 @@ describe('シークレット値を保存するための結合テスト', () => {
     });
   });
 
-  it.todo('should return an error if the body does not have a secret');
+  it('should return an error if the body does not have a secret', async () => {
+    const response = await request.post('/api/v1/secrets').send({
+      hello: 'hi!',
+    });
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({
+      name: 'RequestValidationError',
+      message: 'Request body format is not valid',
+    });
+  });
 
   it.todo('should return an error if the secret is not a string');
 
