@@ -55,4 +55,23 @@ describe('SecretController Tests', () => {
       new SecretValidationError('Secretが短すぎます')
     );
   });
+
+  it('should store the secret and return the urlId', async () => {
+    const req: Request = request;
+    req.body = {
+      secret: 'myValidSecret22',
+    };
+    const res: Response = response;
+    res.status = vi.fn().mockReturnThis();
+    res.json = vi.fn().mockReturnThis();
+    const next = vi.fn();
+
+    const secretByIdController = new SecretController();
+    await secretByIdController.storeSecret(req, res, next);
+
+    expect(next).toBeCalledTimes(0);
+    expect(res.status).toBeCalledTimes(1);
+    expect(res.json).toBeCalledTimes(1);
+    expect(res.json).toBeCalledWith(new UrlId('jhsdgfksdjhfas'));
+  });
 });
