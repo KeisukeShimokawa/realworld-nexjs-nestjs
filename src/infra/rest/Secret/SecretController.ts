@@ -1,10 +1,11 @@
 import { NextFunction } from 'connect';
 import { Request, Response } from 'express';
 import { Secret } from '../../../domain/models/Secret';
+import { SecretStorer } from '../../../services/SecretStorer';
 import { RequestValidationError } from './RequestValidationError';
 
 export class SecretController {
-  constructor() {}
+  constructor(private secretStorer: SecretStorer) {}
 
   async storeSecret(req: Request, res: Response, next: NextFunction) {
     console.log('req', req.body);
@@ -17,6 +18,8 @@ export class SecretController {
         throw new RequestValidationError('Secret is not a string');
 
       const secret = new Secret(req.body.secret);
+
+      const urlId = await this.secretStorer.storeSecretAndUrlId(secret);
     } catch (error) {
       next(error);
     }
