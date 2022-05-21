@@ -1,5 +1,6 @@
 import { request, Request, response, Response } from 'express';
 import { describe, expect, it, vi } from 'vitest';
+import { SecretValidationError } from '../../../domain/errors/SecretValidationError';
 import { RequestValidationError } from './RequestValidationError';
 import { SecretController } from './SecretController';
 
@@ -35,6 +36,23 @@ describe('SecretController Tests', () => {
     expect(next).toBeCalledTimes(1);
     expect(next).toBeCalledWith(
       new RequestValidationError('Secret is not a string')
+    );
+  });
+
+  it('should throw an error if the secret is too short', async () => {
+    const req: Request = request;
+    req.body = {
+      secret: '22',
+    };
+    const res: Response = response;
+    const next = vi.fn();
+
+    const secretByIdController = new SecretController();
+    await secretByIdController.storeSecret(req, res, next);
+
+    expect(next).toBeCalledTimes(1);
+    expect(next).toBeCalledWith(
+      new SecretValidationError('Secretが短すぎます')
     );
   });
 });
