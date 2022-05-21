@@ -20,6 +20,8 @@ export class SecretController {
       const secret = new Secret(req.body.secret);
 
       const urlId = await this.secretStorer.storeSecretAndUrlId(secret);
+
+      res.status(201).json(urlId);
     } catch (error) {
       next(error);
     }
