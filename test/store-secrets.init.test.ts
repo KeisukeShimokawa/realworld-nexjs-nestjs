@@ -51,7 +51,14 @@ describe('シークレット値を保存するための結合テスト', () => {
     });
   });
 
-  it.todo('should store a secret and return the UrlId');
+  it('should store a secret and return the UrlId', async () => {
+    const response = await request.post('/api/v1/secrets').send({
+      secret: 'myValidSecret22',
+    });
+
+    expect(response.status).toBe(201);
+    expect(response.body.urlId.length).toBeGreaterThanOrEqual(10);
+  });
 
   it.todo('should return an unhandled expection error');
 });
