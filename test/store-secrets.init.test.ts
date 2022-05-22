@@ -63,5 +63,19 @@ describe('シークレット値を保存するための結合テスト', () => {
     expect(response.body.urlId.length).toBeGreaterThanOrEqual(10);
   });
 
-  it.todo('should return an unhandled expection error');
+  it('should return an unhandled expection error', async () => {
+    // mock db
+    SecretModel.create = vi.fn().mockImplementationOnce(async () => {
+      throw new Error('server memory is full');
+    });
+    const response = await request.post('/api/v1/secrets').send({
+      secret: 'myValidSecret22',
+    });
+
+    expect(response.status).toBe(500);
+    expect(response.body).toEqual({
+      name: 'InternalServerError',
+      message: 'Something went wrong',
+    });
+  });
 });
