@@ -52,6 +52,7 @@ describe('シークレット値を保存するための結合テスト', () => {
   });
 
   it('should store a secret and return the UrlId', async () => {
+    // mock db
     const response = await request.post('/api/v1/secrets').send({
       secret: 'myValidSecret22',
     });
