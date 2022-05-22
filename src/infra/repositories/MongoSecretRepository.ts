@@ -10,6 +10,12 @@ export class MongoSecretRepository implements SecretRepository {
       mongoose.connect('mongodb://localhost:27017/onetimesecretdb');
     }
   }
+  async storeUrlIdAndSecret(urlId: UrlId, secret: Secret): Promise<void> {
+    await SecretModel.create({
+      urlId: urlId.toString(),
+      secret: secret.toString(),
+    });
+  }
 
   async getSecretByUrlId(urlId: UrlId): Promise<Secret | null> {
     const doc = await SecretModel.findOne({ urlId: urlId.toString() });
