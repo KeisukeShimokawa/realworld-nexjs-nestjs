@@ -1,7 +1,7 @@
-import { Secret } from '../domain/models/Secret';
-import { UrlId } from '../domain/models/UrlId';
-import { SecretNotFoundError } from '../domain/errors/SecretNotFoundError';
-import { SecretRepository } from './SecretRepository';
+import { Secret } from '../models/Secret';
+import { UrlId } from '../models/UrlId';
+import { SecretNotFoundError } from '../errors/SecretNotFoundError';
+import { SecretRepository } from '../../infra/repositories/SecretRepository';
 import { SecretRetriver } from './SecretRetriver';
 
 export class OneTimeSecretRetriever implements SecretRetriver {

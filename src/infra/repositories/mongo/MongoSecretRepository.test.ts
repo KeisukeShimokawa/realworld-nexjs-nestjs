@@ -1,9 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
 import mongoose from 'mongoose';
 import { MongoSecretRepository } from './MongoSecretRepository';
-import { UrlId } from '../../domain/models/UrlId';
+import { UrlId } from '../../../domain/models/UrlId';
 import { SecretModel } from './SecretModel';
-import { Secret } from '../../domain/models/Secret';
+import { Secret } from '../../../domain/models/Secret';
 
 describe('MongoSecretRepository Tests', () => {
   it('should connect to the database', () => {

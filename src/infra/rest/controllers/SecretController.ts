@@ -1,7 +1,7 @@
 import { NextFunction } from 'connect';
 import { Request, Response } from 'express';
 import { Secret } from '../../../domain/models/Secret';
-import { SecretStorer } from '../../../services/SecretStorer';
+import { SecretStorer } from '../../../domain/services/SecretStorer';
 import { RequestValidationError } from './RequestValidationError';
 
 export class SecretController {

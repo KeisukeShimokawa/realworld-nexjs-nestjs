@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { SecretValidationError } from '../../../domain/errors/SecretValidationError';
 import { Secret } from '../../../domain/models/Secret';
 import { UrlId } from '../../../domain/models/UrlId';
-import { SecretStorer } from '../../../services/SecretStorer';
+import { SecretStorer } from '../../../domain/services/SecretStorer';
 import { RequestValidationError } from './RequestValidationError';
 import { SecretController } from './SecretController';
 
