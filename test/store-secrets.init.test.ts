@@ -1,6 +1,7 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import supertest from 'supertest';
 import server from '../src/server';
+import { SecretModel } from '../src/infra/repositories/SecretModel';
 
 const request = supertest(server);
 
@@ -52,6 +53,8 @@ describe('シークレット値を保存するための結合テスト', () => {
   });
 
   it('should store a secret and return the UrlId', async () => {
+    // mock db
+    SecretModel.create = vi.fn();
     const response = await request.post('/api/v1/secrets').send({
       secret: 'myValidSecret22',
     });

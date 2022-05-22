@@ -5,4 +5,8 @@ export class Secret {
     if (secret.length <= 3)
       throw new SecretValidationError('Secretが短すぎます');
   }
+
+  toString(): string {
+    return this.secret;
+  }
 }
