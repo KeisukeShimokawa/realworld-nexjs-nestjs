@@ -1,13 +1,13 @@
+import { SecretRoute } from './infra/rest/routes/SecretRoute';
+import { SecretController } from './infra/rest/controllers/SecretController';
+import { OneTimeSecretStorer } from './domain/services/OneTimeSecretStorer';
+import { SecretByIdRoute } from './infra/rest/routes/SecretByIdRoute';
+import { SecretByIdController } from './infra/rest/controllers/SecretByIdController';
+import { OneTimeSecretRetriever } from './domain/services/OneTImeSecretRetriever';
 import { Application } from './infra/rest/Application';
 import { Route } from './infra/rest/Route';
-import { SecretByIdController } from './infra/rest/SecretById/SecretByIdController';
-import { SecretByIdRoute } from './infra/rest/SecretById/SecretByIdRoute';
-import { OneTimeSecretRetriever } from './services/OneTImeSecretRetriever';
-import { MongoSecretRepository } from './infra/repositories/MongoSecretRepository';
-import { SecretController } from './infra/rest/Secret/SecretController';
-import { SecretRoute } from './infra/rest/Secret/SecretRoute';
-import { OneTimeSecretStorer } from './services/OneTimeSecretStorer';
 import { UniqidTokenGenerator } from './infra/externalServices/UniqidTokenGenerator';
+import { MongoSecretRepository } from './infra/repositories/mongo/MongoSecretRepository';
 
 const secretRepository = new MongoSecretRepository();
 const secretRetriever = new OneTimeSecretRetriever(secretRepository);

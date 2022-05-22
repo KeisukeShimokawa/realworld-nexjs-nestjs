@@ -1,9 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
-import { SecretNotFoundError } from '../domain/errors/SecretNotFoundError';
-import { Secret } from '../domain/models/Secret';
-import { UrlId } from '../domain/models/UrlId';
+import { SecretNotFoundError } from '../errors/SecretNotFoundError';
+import { Secret } from '../models/Secret';
+import { UrlId } from '../models/UrlId';
 import { OneTimeSecretRetriever } from './OneTImeSecretRetriever';
-import { SecretRepository } from './SecretRepository';
+import { SecretRepository } from '../../infra/repositories/SecretRepository';
 
 describe('OneTimeSecretRetriver Tests', () => {
   it('should throw an error if the Secret was not found', () => {

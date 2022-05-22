@@ -1,9 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
-import { Secret } from '../domain/models/Secret';
-import { UrlId } from '../domain/models/UrlId';
+import { Secret } from '../models/Secret';
+import { UrlId } from '../models/UrlId';
 import { OneTimeSecretStorer } from './OneTimeSecretStorer';
-import { SecretRepository } from './SecretRepository';
-import { TokenGenerator } from './TokenGenerator';
+import { SecretRepository } from '../../infra/repositories/SecretRepository';
+import { TokenGenerator } from '../../infra/externalServices/TokenGenerator';
 
 describe('OneTimeSecretStorer Tests', () => {
   it('should store a secret in the repository and return a UrlId', async () => {

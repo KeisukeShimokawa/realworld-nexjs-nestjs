@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { SecretNotFoundError } from '../../../domain/errors/SecretNotFoundError';
 import { SecretValidationError } from '../../../domain/errors/SecretValidationError';
 import { UrlIdValidationError } from '../../../domain/errors/UrlIdValidationError';
-import { RequestValidationError } from '../Secret/RequestValidationError';
+import { RequestValidationError } from '../controllers/RequestValidationError';
 import { errorHandler } from './ErrorHandler';
 
 describe('ErrorHandler Tests', () => {
