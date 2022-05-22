@@ -10,6 +10,7 @@ describe('OneTimeSecretRetriver Tests', () => {
     const secretRepository: SecretRepository = {
       getSecretByUrlId: vi.fn().mockResolvedValueOnce(null),
       removeSecretByUrlId: vi.fn(),
+      storeUrlIdAndSecret: vi.fn(),
     };
     const oneTimeSecretRetriever = new OneTimeSecretRetriever(secretRepository);
 
@@ -28,6 +29,7 @@ describe('OneTimeSecretRetriver Tests', () => {
     const secretRepository: SecretRepository = {
       getSecretByUrlId: vi.fn().mockResolvedValueOnce(new Secret('sadhfasjf')),
       removeSecretByUrlId: vi.fn(),
+      storeUrlIdAndSecret: vi.fn(),
     };
     const oneTimeSecretRetriever = new OneTimeSecretRetriever(secretRepository);
 
