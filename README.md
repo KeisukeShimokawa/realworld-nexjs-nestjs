@@ -40,3 +40,22 @@ npm install --save-dev \
   eslint-plugin-import \
   eslint-plugin-unused-imports
 ```
+
+## 実際の流れは下記のブランチを参照する
+
+- https://github.com/shimopino/outside-in-tdd/tree/feature/1-environment-setup
+- https://github.com/shimopino/outside-in-tdd/tree/feature/2-acceptance-test
+- https://github.com/shimopino/outside-in-tdd/tree/feature/3-green-acceptance-test
+- https://github.com/shimopino/outside-in-tdd/tree/feature/4-refactoring
+- https://github.com/shimopino/outside-in-tdd/tree/feature/5-second-acceptance-test
+- https://github.com/shimopino/outside-in-tdd/tree/feature/6-refactoring
+- https://github.com/shimopino/outside-in-tdd/tree/feature/7-add-secret-retriver
+- https://github.com/shimopino/outside-in-tdd/tree/feature/8-add-secret-repository
+- https://github.com/shimopino/outside-in-tdd/tree/feature/9-pass-get-secrets-ac
+- https://github.com/shimopino/outside-in-tdd/tree/feature/10-uncontrolled-error-handling
+- https://github.com/shimopino/outside-in-tdd/tree/feature/11-acceptance-test-for-store-secret
+- https://github.com/shimopino/outside-in-tdd/tree/feature/12-store-secret-controller
+- https://github.com/shimopino/outside-in-tdd/tree/feature/13-secret-storer
+- https://github.com/shimopino/outside-in-tdd/tree/feature/14-unhandling-error
+- https://github.com/shimopino/outside-in-tdd/tree/feature/15-refactoring-3
+- https://github.com/shimopino/outside-in-tdd/tree/feature/16-e2e
