@@ -5,7 +5,9 @@ import { SecretStorer } from '../../../services/SecretStorer';
 import { RequestValidationError } from './RequestValidationError';
 
 export class SecretController {
-  constructor(private secretStorer: SecretStorer) {}
+  constructor(private secretStorer: SecretStorer) {
+    this.storeSecret = this.storeSecret.bind(this);
+  }
 
   async storeSecret(req: Request, res: Response, next: NextFunction) {
     console.log('req', req.body);
