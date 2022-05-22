@@ -12,4 +12,8 @@ describe('Secret Tests', () => {
       new SecretValidationError('Secretが短すぎます')
     );
   });
+
+  it('should send a secret representation as string', () => {
+    expect(new Secret('myValidSecret').toString()).toBe('myValidSecret');
+  });
 });
