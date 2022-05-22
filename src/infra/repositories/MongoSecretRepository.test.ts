@@ -67,4 +67,21 @@ describe('MongoSecretRepository Tests', () => {
     expect(SecretModel.deleteOne).toBeCalledTimes(1);
     expect(SecretModel.deleteOne).toBeCalledWith({ urlId: 'sdjhfaasjaf' });
   });
+
+  it('should store urlId and Secret into the database', async () => {
+    SecretModel.create = vi.fn();
+    mongoose.connect = vi.fn();
+    mongoose.connection.readyState = 1;
+
+    const urlId = new UrlId('sdjhfaasjaf');
+    const secret = new Secret('sajdgfgsadfdsahfs');
+    const mongoSecretRepository = new MongoSecretRepository();
+    await mongoSecretRepository.storeUrlIdAndSecret(urlId, secret);
+
+    expect(SecretModel.create).toBeCalledTimes(1);
+    expect(SecretModel.create).toBeCalledWith({
+      urlId: 'sdjhfaasjaf',
+      secret: 'sajdgfgsadfdsahfs',
+    });
+  });
 });
