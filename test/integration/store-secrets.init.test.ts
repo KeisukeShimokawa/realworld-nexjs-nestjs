@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import supertest from 'supertest';
-import server from '../src/server';
-import { SecretModel } from '../src/infra/repositories/mongo/SecretModel';
+import server from '../../src/server';
+import { SecretModel } from '../../src/infra/repositories/mongo/SecretModel';
 
 const request = supertest(server);
 
