@@ -6,13 +6,21 @@ import { OneTimeSecretRetriever } from './services/OneTImeSecretRetriever';
 import { MongoSecretRepository } from './infra/repositories/MongoSecretRepository';
 import { SecretController } from './infra/rest/Secret/SecretController';
 import { SecretRoute } from './infra/rest/Secret/SecretRoute';
+import { SecretStorer } from './services/SecretStorer';
+import { Secret } from './domain/models/Secret';
+import { UrlId } from './domain/models/UrlId';
 
 const secretRepository = new MongoSecretRepository();
 const secretRetriever = new OneTimeSecretRetriever(secretRepository);
 const secretByIdController = new SecretByIdController(secretRetriever);
 const secretByIdRoute = new SecretByIdRoute(secretByIdController);
 
-const secretController = new SecretController();
+const secretStorer: SecretStorer = {
+  storeSecretAndUrlId: function (secret: Secret): Promise<UrlId> {
+    throw new Error('Function not implemented.');
+  },
+};
+const secretController = new SecretController(secretStorer);
 const secretRoute = new SecretRoute(secretController);
 
 const routeList: Route[] = [];

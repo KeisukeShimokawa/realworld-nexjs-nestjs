@@ -11,17 +11,54 @@ describe('シークレット値を保存するための結合テスト', () => {
     expect(response.status).toBe(400);
     expect(response.body).toEqual({
       name: 'RequestValidationError',
-      message: 'Request body is not present',
+      message: 'Request body format is not valid',
     });
   });
 
-  it.todo('should return an error if the body does not have a secret');
+  it('should return an error if the body does not have a secret', async () => {
+    const response = await request.post('/api/v1/secrets').send({
+      hello: 'hi!',
+    });
 
-  it.todo('should return an error if the secret is not a string');
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({
+      name: 'RequestValidationError',
+      message: 'Request body format is not valid',
+    });
+  });
 
-  it.todo('should return an error if the secret is too short');
+  it('should return an error if the secret is not a string', async () => {
+    const response = await request.post('/api/v1/secrets').send({
+      secret: 1234567890,
+    });
 
-  it.todo('should store a secret and return the UrlId');
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({
+      name: 'RequestValidationError',
+      message: 'Secret is not a string',
+    });
+  });
+
+  it('should return an error if the secret is too short', async () => {
+    const response = await request.post('/api/v1/secrets').send({
+      secret: '22',
+    });
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({
+      name: 'SecretValidationError',
+      message: 'Secretが短すぎます',
+    });
+  });
+
+  it('should store a secret and return the UrlId', async () => {
+    const response = await request.post('/api/v1/secrets').send({
+      secret: 'myValidSecret22',
+    });
+
+    expect(response.status).toBe(201);
+    expect(response.body.urlId.length).toBeGreaterThanOrEqual(10);
+  });
 
   it.todo('should return an unhandled expection error');
 });
